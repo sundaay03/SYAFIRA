@@ -1,0 +1,567 @@
+/* SYARIAH-AI Modern Islamic Fintech Design System (Dark Mode Permanent) */
+:root {
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', system-ui, sans-serif;
+  --font-arabic: 'Amiri', serif;
+
+  color-scheme: dark;
+
+  /* Color Tokens - Dark Mode Default */
+  --bg-primary: #090e17;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #1e293b;
+  --bg-glass: rgba(15, 23, 42, 0.75);
+  --bg-glass-strong: rgba(15, 23, 42, 0.92);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+
+  --emerald-50: #062b21;
+  --emerald-100: #064e3b;
+  --emerald-200: #047857;
+  --emerald-500: #10b981;
+  --emerald-600: #34d399;
+  --emerald-700: #6ee7b7;
+  --emerald-800: #065f46;
+  --emerald-900: #064e3b;
+
+  --gold-50: #291e05;
+  --gold-100: #453008;
+  --gold-400: #fbbf24;
+  --gold-500: #fbbf24;
+  --gold-600: #d97706;
+
+  --accent-cyan: #06b6d4;
+  --accent-rose: #f43f5e;
+  --accent-blue: #3b82f6;
+
+  --border-light: #1e293b;
+  --border-glass: rgba(16, 185, 129, 0.25);
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.25);
+  --shadow-glow-gold: 0 0 25px rgba(245, 158, 11, 0.25);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --font-scale: 1;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/* Accessibility Font Scaling */
+body.font-scale-sm { --font-scale: 0.9; }
+body.font-scale-md { --font-scale: 1; }
+body.font-scale-lg { --font-scale: 1.15; }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) var(--bg-primary);
+}
+
+/* Global Custom Scrollbars - Clean & Dark-mode Aware */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--emerald-500);
+}
+
+::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: calc(15px * var(--font-scale));
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--emerald-500);
+  box-shadow: var(--shadow-md);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.6);
+}
+
+/* Islamic Geometric Pattern Subtle Overlay */
+.islamic-bg-pattern {
+  position: relative;
+}
+.islamic-bg-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Badges & Tags */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.badge-emerald {
+  background: var(--emerald-50);
+  color: var(--emerald-600);
+  border: 1px solid var(--emerald-200);
+}
+
+.badge-gold {
+  background: var(--gold-50);
+  color: var(--gold-600);
+  border: 1px solid var(--gold-400);
+}
+
+.badge-outline {
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-primary);
+  border-color: var(--text-muted);
+}
+
+.btn-outline {
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+
+.btn-outline:hover {
+  border-color: var(--emerald-500);
+  color: var(--emerald-600);
+  background: var(--emerald-50);
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-icon {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease-out forwards;
+}
+
+/* Modal backdrop */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 14, 23, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+/* Disclaimer Banner */
+.disclaimer-banner {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.08) 0%, rgba(245, 158, 11, 0.08) 100%);
+  border-left: 4px solid var(--emerald-500);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* ========================================================== */
+/* RESPONSIVE DESIGN UTILITIES & MOBILE OPTIMIZATIONS        */
+/* ========================================================== */
+
+/* Touch-friendly Scrollable Tabs & Pills Bar (Hidden Scrollbar) */
+.scrollable-tabs-row,
+.no-scrollbar {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  gap: 8px;
+  max-width: 100%;
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+.scrollable-tabs-row::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Edge, Opera */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.scrollable-tabs-row > *,
+.no-scrollbar > * {
+  flex-shrink: 0;
+}
+
+/* Responsive Table Wrapper with Smooth Horizontal Touch Scroll */
+.table-responsive-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(16, 185, 129, 0.4) var(--bg-tertiary);
+}
+
+.table-responsive-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-responsive-wrapper::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+  border-radius: 999px;
+}
+
+.table-responsive-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.4);
+  border-radius: 999px;
+}
+
+.table-responsive-wrapper::-webkit-scrollbar-button {
+  display: none !important;
+}
+
+/* Responsive Grids */
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 20px;
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+
+.responsive-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 12px;
+}
+
+/* Media Queries for Screens <= 768px (Mobile & Small Tablets) */
+@media (max-width: 768px) {
+  :root {
+    --radius-xl: 16px;
+    --radius-lg: 14px;
+  }
+
+  body {
+    font-size: calc(14px * var(--font-scale));
+  }
+
+  /* Utility display classes */
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+
+  .mobile-flex {
+    display: flex !important;
+  }
+
+  /* Modals on mobile */
+  .modal-overlay {
+    padding: 10px !important;
+  }
+
+  .modal-content {
+    max-width: 96vw !important;
+    width: 96% !important;
+    max-height: 92vh !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 0 !important;
+  }
+
+  /* Main content padding reduction */
+  .app-main-content {
+    padding: 14px 10px 28px !important;
+  }
+
+  /* Mobile footer stacked */
+  .app-footer-inner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .app-footer-right {
+    align-items: flex-start !important;
+  }
+
+  /* Force 1-column collapse where needed on mobile */
+  .mobile-col-1 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .mobile-stack {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .mobile-full-width {
+    width: 100% !important;
+  }
+}
+
+/* Extra small devices (<= 480px) */
+@media (max-width: 480px) {
+  .brand-subtitle {
+    display: none !important;
+  }
+
+  .navbar-container {
+    padding: 8px 10px !important;
+    gap: 6px !important;
+  }
+
+  .app-main-content {
+    padding: 10px 8px 24px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+
+  .mobile-flex {
+    display: none !important;
+  }
+}
+
+/* ========================================================== */
+/* KATEX MATHEMATICAL FORMULA STYLING                         */
+/* ========================================================== */
+
+.katex {
+  font-size: 1.05em !important;
+  color: var(--text-primary) !important;
+  text-rendering: geometricPrecision;
+}
+
+.math-display-wrapper {
+  margin: 10px 0;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(6, 182, 212, 0.04) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.math-display-wrapper::-webkit-scrollbar {
+  display: none !important;
+}
+
+.math-display-wrapper .katex-display {
+  margin: 0 !important;
+  text-align: center;
+}
+
+.inline-math {
+  display: inline-block;
+  padding: 0 3px;
+  vertical-align: middle;
+}
+
+.math-fallback {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: var(--emerald-500);
+}
+
+
