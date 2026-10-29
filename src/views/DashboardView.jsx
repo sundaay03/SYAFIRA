@@ -69,7 +69,7 @@ export default function DashboardView({
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
             <span className="badge" style={{ background: 'rgba(255, 255, 255, 0.15)', color: '#ffffff', border: '1px solid rgba(255, 255, 255, 0.25)', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Sparkles size={14} color="#fef3c7" />
-              <span>Selamat Datang, {profile.name}</span>
+              <span>Selamat Datang, {profile.name || "Sobat SYAFIRA"}</span>
             </span>
             <span className="badge" style={{ background: 'rgba(245, 158, 11, 0.25)', color: '#fef3c7', border: '1px solid #fbbf24', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <Target size={14} color="#fbbf24" />

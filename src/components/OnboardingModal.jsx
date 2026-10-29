@@ -1,5 +1,5 @@
 // Onboarding 3 Langkah (PRD FR-01)
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sparkles, Shield, Compass, CheckCircle, ArrowRight, UserCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -39,9 +39,25 @@ export default function OnboardingModal({
   profile = {}
 }) {
   const [step, setStep] = useState(1);
-  const [name, setName] = useState(profile.name || "Sandi Riandi");
+  const [name, setName] = useState(() => {
+    if (!profile?.hasCompletedOnboarding || profile?.name === "") {
+      return "";
+    }
+    return profile?.name || "";
+  });
   const [selectedGoal, setSelectedGoal] = useState("goal-partnership");
   const [userRole, setUserRole] = useState(profile.role || "Mahasiswa");
+
+  // Pastikan form nama kosong jika pengguna baru / belum onboarding
+  useEffect(() => {
+    if (isOpen) {
+      if (!profile?.hasCompletedOnboarding || profile?.name === "") {
+        setName("");
+      } else {
+        setName(profile?.name || "");
+      }
+    }
+  }, [isOpen, profile?.hasCompletedOnboarding, profile?.name]);
 
   if (!isOpen) return null;
 
@@ -56,7 +72,7 @@ export default function OnboardingModal({
 
     const selectedGoalObj = LEARNING_GOALS.find(g => g.id === selectedGoal);
     const updated = {
-      name: name.trim() || "Sandi Riandi",
+      name: name.trim() || (profile?.hasCompletedOnboarding && profile?.name ? profile.name : "Sobat SYAFIRA"),
       role: userRole,
       learningGoal: selectedGoalObj ? selectedGoalObj.title : "Dasar Keuangan Syariah",
       hasCompletedOnboarding: true

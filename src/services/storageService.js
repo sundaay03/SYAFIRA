@@ -12,7 +12,7 @@ const STORAGE_KEYS = {
 };
 
 const DEFAULT_PROFILE = {
-  name: "Sandi Riandi",
+  name: "",
   role: "Mahasiswa / Gen Z",
   avatar: "user-student",
   learningGoal: "Memahami Dasar & Kemitraan Usaha Syariah",
@@ -33,6 +33,11 @@ export const storageService = {
       if (data) {
         const parsed = JSON.parse(data);
         let xp = typeof parsed.xp === 'number' ? parsed.xp : 0;
+
+        // Jika belum onboarding atau name masih default hardcode lama, kosongkan nama
+        if (!parsed.hasCompletedOnboarding && parsed.name === "Sandi Riandi") {
+          parsed.name = "";
+        }
 
         // Jika ada XP artifisial akibat bug simulator switch tab sebelumnya (> 1500 tanpa modul tuntas) atau belum onboarding
         if (!parsed.hasCompletedOnboarding || xp >= 5000) {
@@ -61,7 +66,7 @@ export const storageService = {
     const profile = this.getProfile();
     const freshProfile = {
       ...DEFAULT_PROFILE,
-      name: profile.name || "Sandi Riandi",
+      name: "",
       role: profile.role || "Mahasiswa / Gen Z",
       xp: 0,
       level: 1,
