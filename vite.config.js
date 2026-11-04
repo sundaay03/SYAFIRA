@@ -58,7 +58,7 @@ function formatMessagesForGemini(rawMessages) {
 }
 
 async function handleGeminiChat(messages, apiKey) {
-  const models = ["gemini-3.5-flash", "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.7-flash", "gemini-flash-latest"];
+  const models = ["gemini-3.5-flash", "gemini-3.6-flash", "gemini-3.8-flash", "gemini-3.7-flash", "gemini-flash-latest"];
   const contents = formatMessagesForGemini(messages);
 
   if (contents.length === 0) {
@@ -90,7 +90,13 @@ async function handleGeminiChat(messages, apiKey) {
       if (!resp.ok) {
         const errJson = await resp.json().catch(() => ({}));
         const msg = errJson.error?.message || `HTTP ${resp.status}`;
-        if (resp.status === 404 || resp.status === 503 || msg.toLowerCase().includes("not found") || msg.toLowerCase().includes("high demand")) {
+        if (
+          resp.status === 404 ||
+          resp.status === 503 ||
+          msg.toLowerCase().includes("not found") ||
+          msg.toLowerCase().includes("high demand") ||
+          msg.toLowerCase().includes("no longer available")
+        ) {
           lastError = new Error(msg);
           continue;
         }
@@ -135,7 +141,7 @@ function backendApiPlugin() {
           try {
             const { messages } = JSON.parse(body || '{}');
             const env = loadEnv(server.config.mode || 'development', process.cwd(), '');
-            const apiKey = (env.GEMINI_API_KEY || process.env.GEMINI_API_KEY || '').trim();
+            const apiKey = (env.GEMINI_API_KEY || process.env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || '').trim();
 
             if (!apiKey) {
               res.statusCode = 500;
